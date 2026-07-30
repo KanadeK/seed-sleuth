@@ -14,7 +14,7 @@ inputs:
     required: false
     default: artifacts/seed-sleuth
   fail-on:
-    description: Lowest contract severity that fails the step: error, warning, or none.
+    description: "Lowest contract severity that fails the step: error, warning, or none."
     required: false
     default: error
 outputs:
@@ -27,5 +27,5 @@ outputs:
   adapter-errors:
     description: Number of adapter failures.
 runs:
-  using: node20
+  using: node24
   main: action/index.js

@@ -80,6 +80,22 @@ for (const file of files) {
       failures.push(`${relative}:${tabLine + 1}: tab indentation is not allowed`);
     }
   }
+  if (extension === ".yml" || extension === ".yaml") {
+    for (let index = 0; index < lines.length; index += 1) {
+      const separator = lines[index].indexOf(":");
+      const value = separator === -1 ? "" : lines[index].slice(separator + 1).trim();
+      const quotedOrBlock =
+        value.startsWith('"') ||
+        value.startsWith("'") ||
+        value.startsWith("|") ||
+        value.startsWith(">");
+      if (value.includes(": ") && !quotedOrBlock) {
+        failures.push(
+          `${relative}:${index + 1}: quote YAML scalars containing a colon followed by a space`,
+        );
+      }
+    }
+  }
   if (extension === ".json") {
     try {
       JSON.parse(content);
