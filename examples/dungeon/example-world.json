@@ -1,0 +1,19 @@
+{
+  "format": "seed-sleuth-world",
+  "schemaVersion": 1,
+  "seed": 7,
+  "width": 11,
+  "height": 7,
+  "cells": [
+    "###########",
+    "#S....#...#",
+    "#####.#.#.#",
+    "#.....#.#E#",
+    "#.#####.#.#",
+    "#.........#",
+    "###########"
+  ],
+  "metadata": {
+    "purpose": "Small hand-auditable contract example"
+  }
+}

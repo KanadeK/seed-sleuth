@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/KanadeK/seed-sleuth/main/schemas/config.schema.json",
+  "title": "SeedSleuth configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "schemaVersion", "name", "generator", "seeds", "assertions"],
+  "properties": {
+    "format": {
+      "const": "seed-sleuth-config"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "generator": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "path"],
+          "properties": {
+            "kind": {
+              "const": "module"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "export": {
+              "type": "string"
+            },
+            "options": {
+              "type": "object"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "command", "args"],
+          "properties": {
+            "kind": {
+              "const": "command"
+            },
+            "command": {
+              "type": "string",
+              "minLength": 1
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cwd": {
+              "type": "string"
+            },
+            "options": {
+              "type": "object"
+            },
+            "environment": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "seeds": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": ["values"],
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "start": {
+              "type": "integer"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100000
+            },
+            "step": {
+              "type": "integer",
+              "not": {
+                "const": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "limits": {
+      "type": "object"
+    },
+    "tiles": {
+      "type": "object"
+    },
+    "assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "border",
+              "connected",
+              "count",
+              "metric",
+              "minimumSeparation",
+              "pathDistance",
+              "reachable"
+            ]
+          },
+          "severity": {
+            "enum": ["info", "warning", "error"]
+          }
+        }
+      }
+    },
+    "outliers": {
+      "type": "object"
+    },
+    "capture": {
+      "enum": ["all", "failures", "failures-and-outliers", "none"]
+    }
+  }
+}

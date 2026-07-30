@@ -1,0 +1,73 @@
+{
+  "format": "seed-sleuth-config",
+  "schemaVersion": 1,
+  "name": "My procedural world contract",
+  "description": "Replace the template generator with your real seeded generator.",
+  "generator": {
+    "kind": "module",
+    "path": "./adapter.js",
+    "export": "generate",
+    "options": {
+      "width": 9,
+      "height": 7
+    }
+  },
+  "seeds": {
+    "start": 1,
+    "count": 100,
+    "step": 1
+  },
+  "limits": {
+    "concurrency": 4,
+    "timeoutMs": 2000,
+    "maxWorldBytes": 1000000,
+    "maxCells": 1000000,
+    "repeats": 2,
+    "maxFailures": 100
+  },
+  "tiles": {
+    "walkable": [".", "S", "E"],
+    "blocked": ["#"]
+  },
+  "assertions": [
+    {
+      "id": "one-start",
+      "type": "count",
+      "symbol": "S",
+      "eq": 1,
+      "severity": "error"
+    },
+    {
+      "id": "one-exit",
+      "type": "count",
+      "symbol": "E",
+      "eq": 1,
+      "severity": "error"
+    },
+    {
+      "id": "exit-reachable",
+      "type": "reachable",
+      "from": "S",
+      "to": "E",
+      "severity": "error"
+    },
+    {
+      "id": "all-walkable-connected",
+      "type": "connected",
+      "max": 1,
+      "severity": "error"
+    },
+    {
+      "id": "sealed-border",
+      "type": "border",
+      "allowedSymbols": ["#"],
+      "severity": "error"
+    }
+  ],
+  "outliers": {
+    "metrics": ["walkableRatio", "componentCount", "deadEndRatio", "tileEntropy"],
+    "threshold": 4.5,
+    "fail": false
+  },
+  "capture": "failures-and-outliers"
+}

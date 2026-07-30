@@ -1,0 +1,90 @@
+{
+  "format": "seed-sleuth-config",
+  "schemaVersion": 1,
+  "name": "Dungeon contract · repaired connector",
+  "description": "Ninety-six deterministic room-and-corridor worlds generated with both halves of every connector.",
+  "generator": {
+    "kind": "module",
+    "path": "./adapter.js",
+    "export": "generate",
+    "options": {
+      "mode": "healthy",
+      "width": 31,
+      "height": 21,
+      "rooms": 7
+    }
+  },
+  "seeds": {
+    "start": 1000,
+    "count": 96,
+    "step": 17
+  },
+  "limits": {
+    "concurrency": 4,
+    "timeoutMs": 1500,
+    "maxWorldBytes": 100000,
+    "maxCells": 10000,
+    "repeats": 2,
+    "maxFailures": 96
+  },
+  "tiles": {
+    "walkable": [".", "S", "E"],
+    "blocked": ["#"]
+  },
+  "assertions": [
+    {
+      "id": "one-start",
+      "type": "count",
+      "symbol": "S",
+      "eq": 1,
+      "severity": "error"
+    },
+    {
+      "id": "one-exit",
+      "type": "count",
+      "symbol": "E",
+      "eq": 1,
+      "severity": "error"
+    },
+    {
+      "id": "exit-reachable",
+      "type": "reachable",
+      "from": "S",
+      "to": "E",
+      "severity": "error"
+    },
+    {
+      "id": "all-floor-connected",
+      "type": "connected",
+      "max": 1,
+      "severity": "error"
+    },
+    {
+      "id": "start-exit-spacing",
+      "type": "minimumSeparation",
+      "symbols": ["S", "E"],
+      "min": 8,
+      "severity": "warning"
+    },
+    {
+      "id": "walkable-density",
+      "type": "metric",
+      "metric": "walkableRatio",
+      "min": 0.08,
+      "max": 0.52,
+      "severity": "warning"
+    },
+    {
+      "id": "sealed-border",
+      "type": "border",
+      "allowedSymbols": ["#"],
+      "severity": "error"
+    }
+  ],
+  "outliers": {
+    "metrics": ["walkableRatio", "deadEndRatio", "tileEntropy"],
+    "threshold": 4.5,
+    "fail": false
+  },
+  "capture": "all"
+}

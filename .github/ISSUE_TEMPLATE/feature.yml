@@ -1,0 +1,35 @@
+name: Contract or adapter proposal
+description: Propose a focused, testable extension.
+title: "[Proposal] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: world_failure
+    attributes:
+      label: World failure this would detect
+      description: Describe a real generated-world defect or workflow gap.
+    validations:
+      required: true
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Minimal protocol fixture
+      description: Show the smallest world/config that demonstrates the need.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Expected evidence and exit behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope checks
+      options:
+        - label: This is not a request for a hosted world-upload service.
+          required: true
+        - label: The proposal can be tested deterministically.
+          required: true

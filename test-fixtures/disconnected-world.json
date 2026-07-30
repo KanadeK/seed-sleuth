@@ -1,0 +1,14 @@
+{
+  "format": "seed-sleuth-world",
+  "schemaVersion": 1,
+  "seed": 4,
+  "width": 5,
+  "height": 5,
+  "cells": [
+    "#####",
+    "#S###",
+    "#####",
+    "###E#",
+    "#####"
+  ]
+}

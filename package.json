@@ -1,0 +1,63 @@
+{
+  "name": "seed-sleuth",
+  "version": "0.1.0",
+  "description": "Sweep procedural game worlds across seeds, prove playability contracts, and preserve visual counterexamples.",
+  "type": "module",
+  "bin": {
+    "seed-sleuth": "./bin/seed-sleuth.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "action/",
+    "bin/",
+    "docs/",
+    "examples/",
+    "schemas/",
+    "src/",
+    "templates/",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "README.zh-CN.md",
+    "SECURITY.md",
+    "action.yml"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "demo": "node scripts/demo.mjs",
+    "determinism-check": "node scripts/determinism-check.mjs",
+    "lint": "node scripts/lint.mjs",
+    "package": "node scripts/package-release.mjs",
+    "release-check": "node scripts/release-check.mjs",
+    "serve": "node scripts/serve-site.mjs",
+    "test": "node --test",
+    "test:coverage": "node --experimental-test-coverage --test --test-coverage-lines=80 --test-coverage-branches=70 --test-coverage-functions=85",
+    "verify": "node scripts/verify.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "game-development",
+    "procedural-generation",
+    "property-testing",
+    "roguelike",
+    "worldgen",
+    "level-design",
+    "qa",
+    "testing",
+    "github-action"
+  ],
+  "license": "MIT",
+  "author": "KanadeK <121669563+KanadeK@users.noreply.github.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KanadeK/seed-sleuth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KanadeK/seed-sleuth/issues"
+  },
+  "homepage": "https://kanadek.github.io/seed-sleuth/"
+}

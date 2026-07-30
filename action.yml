@@ -1,0 +1,31 @@
+name: SeedSleuth
+description: Sweep procedural game seeds and fail on playability-contract violations.
+author: KanadeK
+branding:
+  icon: search
+  color: green
+inputs:
+  config:
+    description: Path to a SeedSleuth JSON config.
+    required: false
+    default: seed-sleuth.config.json
+  output:
+    description: Directory for JSON, HTML, JUnit, and Markdown evidence.
+    required: false
+    default: artifacts/seed-sleuth
+  fail-on:
+    description: Lowest contract severity that fails the step: error, warning, or none.
+    required: false
+    default: error
+outputs:
+  report:
+    description: Absolute path to report.json.
+  passed:
+    description: Number of passing seeds.
+  failed:
+    description: Number of seeds with contract violations.
+  adapter-errors:
+    description: Number of adapter failures.
+runs:
+  using: node20
+  main: action/index.js
